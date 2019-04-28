@@ -4,17 +4,13 @@ const login = prompt("Введите пароль администратора!"
 const ADMIN_PASSWORD = 'm4ng0h4ckz';
 let message;
 
-if (login != null) {
+if (login !== null) {
     if (login === ADMIN_PASSWORD) {
-        let message = 'Добро пожаловать!';
-        alert(message); 
-
+        message = 'Добро пожаловать';
     } else {
-        let message = 'Доступ запрещен, неверный пароль!';
-        alert(message);   
+        message = 'Доступ запрещен, неверный пароль!';  
     }
 } else {
-    let message = 'Отменино пользователем';
-    alert(message);
+    message = 'Отменино пользователем';
 }
-
+alert(message);
