@@ -7,26 +7,25 @@ const isLoginValid = function(login) {
 };
 
 const isLoginUnique = function(allLogins, login) {
-  return allLogins.includes(login) ? false : true;
+  return allLogins.includes(login);
 };
 
 const addLogin = function(allLogins, login) {
   if(isLoginValid(login) === false) {
     return 'Ошибка! Логин должен быть от 4 до 16 символов';
   };
-  if (isLoginUnique(allLogins, login) === false) {
+  if (isLoginUnique(allLogins, login)) {
     return 'Такой логин уже используется!';
-  };
-  if (isLoginUnique(allLogins, login) === true) {
+  } else {
     logins.push(login);
     return 'Логин успешно добавлен!';
-  };
+  }  
 };
 
-console.log(addLogin(logins, 'Ajax'));
-console.log(addLogin(logins, 'robotGoogles'));
-console.log(addLogin(logins, 'Zod'));
-console.log(addLogin(logins, 'jqqdqwdqwdqwdqwdqwdqwewq'));
+console.log(addLogin(logins, 'Ajax')); // 'Логин успешно добавлен!'
+console.log(addLogin(logins, 'robotGoogles')); // 'Такой логин уже используется!'
+console.log(addLogin(logins, 'Zod')); // 'Ошибка! Логин должен быть от 4 до 16 символов'
+console.log(addLogin(logins, 'jqqdqwdqwdqwdqwdqwdqwewq')); // 'Ошибка! Логин должен быть от 4 до 16 символов'
 
 
 
