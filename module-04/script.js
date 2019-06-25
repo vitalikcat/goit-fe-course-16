@@ -23,7 +23,9 @@ const notepad = {
      * Возвращает: заметку с совпавшим полем id или undefined если ничего не найдено
      */
     for (const note of this.notes) {
-      if (note.id === id) return note;
+      if (note.id === id) {
+        return note;
+      }
     }
   },
   saveNote(note) {
@@ -33,12 +35,8 @@ const notepad = {
      * Принимает: объект заметки
      * Возвращает: сохраненную заметку
      */
-    // if (note.id !== undefined) {
-    //   for (let i=0; i < notepad.notes.length; i+=1){
-    //     const message = 'Такая заметка уже сохранена';
-    //     if(notepad.notes[i].id === note.id) return message;
-    //   }
     this.notes.push(note);
+    return note;
     // }
   },
   deleteNote(id) {
@@ -48,14 +46,8 @@ const notepad = {
      * Принимает: идентификатор заметки
      * Возвращает: ничего
      */
-    for (let i = 0; i < this.notes.length; i += 1) {
-      const note = this.notes[i];
-
-      if (note.id === id) {
-        this.notes.splice(i, 1);
-        return;
-      }
-    }
+    const note = this.findNoteById(id);
+    this.notes.splice(this.notes.includes(note), 1);
   },
   updateNoteContent(id, updatedContent) {
     /*
@@ -66,13 +58,9 @@ const notepad = {
      * Принимает: идентификатор заметки и объект, полями которого надо обновить заметку
      * Возвращает: обновленную заметку
      */
-
-    for (let note of this.notes) {
-      if (notepad.notes.id === id) {
-        Object.assign(note, updatedContent);
-        return this.notes;
-      }
-    }
+    const note = this.findNoteById(id);
+    Object.assign(note, updatedContent);
+    return note;
   },
   updateNotePriority(id, priority) {
     /*
@@ -81,7 +69,6 @@ const notepad = {
      * Принимает: идентификатор заметки и ее новый приоритет
      * Возвращает: обновленную заметку
      */
-
     const note = this.findNoteById(id);
     note.priority = priority;
     return note;
@@ -155,13 +142,15 @@ notepad.saveNote({
   priority: Priority.LOW
 });
 
+/**
+ * Смотрю что у меня в заметках.
+ */
 console.log("Все текущие заметки: ", notepad.getNotes());
 
 /*
  * Зима уже близко, пора поднять приоритет на покупку одежды
  */
 notepad.updateNotePriority("id-4", Priority.NORMAL);
-
 console.log(
   "Заметки после обновления приоритета для id-4: ",
   notepad.getNotes()
@@ -171,7 +160,6 @@ console.log(
  * Решил что фреймворки отложу немного, понижаю приоритет
  */
 notepad.updateNotePriority("id-3", Priority.LOW);
-
 console.log(
   "Заметки после обновления приоритета для id-3: ",
   notepad.getNotes()
@@ -204,17 +192,11 @@ console.log(
 /*
  * Обновим контент заметки с id-3
  */
-notepad.updateNoteContent("id-3", {
-  title: "Get comfy with React.js or Vue.js"
-});
-
-console.log(
-  "Заметки после обновления контента заметки с id-3: ",
-  notepad.getNotes()
-);
+notepad.updateNoteContent("id-3", { title: "Get comfy with React.js" });
+console.log("Обновили заметку с id-3", notepad.getNotes());
 
 /*
  * Повторил HTML и CSS, удаляю запись c id-2
  */
 notepad.deleteNote("id-2");
-console.log("Заметка с id-2 была удалена!", notepad.getNotes());
+console.log("Заметки после удаления с id 2: ", notepad.getNotes());
