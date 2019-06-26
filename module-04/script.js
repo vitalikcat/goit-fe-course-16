@@ -100,8 +100,8 @@ const notepad = {
      * Возвращает: новый массив заметок с подходящим приоритетом
      */
     const newNotes = [];
-    for (let i of this.notes) {
-      if (i.priority === priority) newNotes.push(i);
+    for (const note of this.notes) {
+      if (note.priority === priority) newNotes.push(note);
     }
     return newNotes;
   }
