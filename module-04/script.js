@@ -47,7 +47,7 @@ const notepad = {
      * Возвращает: ничего
      */
     const note = this.findNoteById(id);
-    this.notes.splice(this.notes.includes(note), 1);
+    this.notes.splice(this.notes.indexOf(note), 1);
   },
   updateNoteContent(id, updatedContent) {
     /*
